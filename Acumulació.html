@@ -1,0 +1,1400 @@
+<!DOCTYPE html>
+<html lang="ca">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Sol·licitud d’acumulació de jornada</title>
+
+<style>
+
+/* ==========================================================
+   GENERAL
+   ========================================================== */
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: #e5e5e5;
+    color: #111;
+    font-family: "Times New Roman", Times, serif;
+    font-size: 12.5pt;
+}
+
+
+/* ==========================================================
+   PÀGINA A4
+   ========================================================== */
+
+.pagina {
+    width: 210mm;
+    min-height: 297mm;
+    margin: 10mm auto;
+    padding: 11mm 14mm 8mm 14mm;
+    background: white;
+    box-shadow: 0 0 6px rgba(0,0,0,0.25);
+}
+
+
+/* ==========================================================
+   CAPÇALERA
+   ========================================================== */
+
+.capcalera {
+    height: 29mm;
+    display: flex;
+    align-items: flex-start;
+}
+
+.logo {
+    width: 70mm;
+    height: auto;
+    max-height: 27mm;
+    object-fit: contain;
+    object-position: left top;
+}
+
+
+/* ==========================================================
+   TÍTOL
+   ========================================================== */
+
+.titol {
+    margin-top: 2mm;
+    margin-bottom: 6mm;
+    font-weight: bold;
+    font-size: 14pt;
+    line-height: 1.15;
+}
+
+.titol-normal {
+    font-weight: normal;
+}
+
+
+/* ==========================================================
+   IDENTIFICACIÓ
+   ========================================================== */
+
+.identificacio {
+    border-top: 1px solid #111;
+    border-bottom: 1px solid #111;
+    padding: 4mm 2mm 3mm 2mm;
+    margin-bottom: 7mm;
+}
+
+.camp {
+    display: flex;
+    align-items: baseline;
+    margin-bottom: 4mm;
+}
+
+.camp:last-child {
+    margin-bottom: 0;
+}
+
+.etiqueta {
+    width: 18mm;
+    flex-shrink: 0;
+}
+
+input[type="text"] {
+    border: none;
+    border-bottom: 1px solid #777;
+    background: transparent;
+    font-family: "Times New Roman", Times, serif;
+    font-size: 12.5pt;
+    outline: none;
+    padding: 0 2mm 1mm 1mm;
+}
+
+.nom {
+    width: 150mm;
+}
+
+.nip {
+    width: 70mm;
+}
+
+
+/* ==========================================================
+   TEXT INFORMATIU
+   ========================================================== */
+
+.text-informatiu {
+    line-height: 1.22;
+    margin-bottom: 6mm;
+}
+
+.negreta {
+    font-weight: bold;
+}
+
+
+/* ==========================================================
+   SOL·LICITO
+   ========================================================== */
+
+.sollicito {
+    font-weight: bold;
+    margin-top: 5mm;
+    margin-bottom: 2mm;
+}
+
+.titol-taula {
+    border-top: 1px solid #111;
+    border-bottom: 1px solid #111;
+    padding: 1.5mm 2mm;
+    margin-bottom: 2mm;
+}
+
+
+/* ==========================================================
+   TAULA
+   ========================================================== */
+
+.taula-acumulacions {
+    width: 78%;
+    margin: 0 auto;
+    border-collapse: collapse;
+    table-layout: fixed;
+    font-size: 12.5pt;
+}
+
+.taula-acumulacions th,
+.taula-acumulacions td {
+    border: 1px solid #777;
+    height: 7mm;
+    padding: 0.8mm 2mm;
+}
+
+.taula-acumulacions th {
+    height: 7.5mm;
+    text-align: center;
+    font-weight: normal;
+}
+
+.taula-acumulacions input[type="date"] {
+    width: 100%;
+    border: none;
+    background: transparent;
+    text-align: center;
+    font-family: "Times New Roman", Times, serif;
+    font-size: 11.5pt;
+    outline: none;
+}
+
+
+/* ==========================================================
+   DATA FINAL
+   ========================================================== */
+
+.data-final {
+    margin-top: 6mm;
+    display: flex;
+    align-items: baseline;
+    gap: 3mm;
+}
+
+.data-final input {
+    width: 20mm;
+}
+
+
+/* ==========================================================
+   SIGNATURES
+   ========================================================== */
+
+.signatures {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 8mm;
+    margin-bottom: 6mm;
+    text-align: center;
+}
+
+.signatura {
+    width: 43%;
+}
+
+
+/* Text de la signatura */
+
+.text-signatura {
+    margin-bottom: 2mm;
+}
+
+
+/* ==========================================================
+   RECUADRE DEL TREBALLADOR
+   ========================================================== */
+
+.recuadre-signatura {
+    width: 100%;
+    height: 30mm;
+    border: 1px solid #555;
+    text-align: left;
+    padding: 3mm;
+    margin-top: 2mm;
+    font-size: 10.5pt;
+    line-height: 1.6;
+}
+
+
+/* ==========================================================
+   ESPAI PER A LA SIGNATURA DEL DIRECTOR
+   ========================================================== */
+
+.espai-signatura-director {
+    width: 100%;
+    height: 25mm;
+}
+
+
+/* ==========================================================
+   PEU
+   ========================================================== */
+
+.peu {
+    margin-top: 4mm;
+    padding-top: 4mm;
+    text-align: center;
+    font-family: Arial, sans-serif;
+    font-size: 9.5pt;
+    line-height: 1.45;
+}
+
+
+/* ==========================================================
+   BOTONS
+   ========================================================== */
+
+.botons {
+    position: fixed;
+    right: 15px;
+    top: 15px;
+    z-index: 1000;
+    display: flex;
+    gap: 8px;
+}
+
+button {
+    padding: 9px 15px;
+    border: 1px solid #555;
+    background: white;
+    border-radius: 3px;
+    cursor: pointer;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+}
+
+button:hover {
+    background: #eeeeee;
+}
+
+.boto-correo {
+    font-weight: bold;
+}
+
+
+/* ==========================================================
+   IMPRESSIÓ
+   ========================================================== */
+
+@media print {
+
+    @page {
+        size: A4;
+        margin: 0;
+    }
+
+    body {
+        background: white;
+    }
+
+    .pagina {
+        width: 210mm;
+        min-height: 297mm;
+        margin: 0;
+        padding: 11mm 14mm 8mm 14mm;
+        box-shadow: none;
+    }
+
+    .botons {
+        display: none;
+    }
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- ========================================================
+     BOTONS
+     ======================================================== -->
+
+<div class="botons">
+
+    <button
+        type="button"
+        class="boto-correo"
+        onclick="enviarCorreo()">
+
+        ENVIAR PER CORREU
+
+    </button>
+
+
+    <button
+        type="button"
+        onclick="window.print()">
+
+        IMPRIMIR
+
+    </button>
+
+</div>
+
+
+
+<!-- ========================================================
+     PÀGINA
+     ======================================================== -->
+
+<div class="pagina">
+
+
+    <!-- ====================================================
+         LOGO
+         ==================================================== -->
+
+    <div class="capcalera">
+
+        <img
+            src="logo.png"
+            class="logo"
+            alt="Logo">
+
+    </div>
+
+
+
+    <!-- ====================================================
+         TÍTOL
+         ==================================================== -->
+
+    <div class="titol">
+
+        Sol·licitud d’acumulació de jornada del personal dels
+        àmbits d’administració i de rehabilitació.
+
+        <span class="titol-normal">
+            Modalitat Mensual.
+        </span>
+
+        <br>
+
+        <span class="titol-normal">
+
+            (Resolució, de data 20 de juny de 2014, del secretari
+            general del Departament de Justícia en relació a
+            l’acumulació de jornada de personal dels àmbits de
+            rehabilitació i administració adscrits a centres
+            penitenciaris).
+
+        </span>
+
+    </div>
+
+
+
+    <!-- ====================================================
+         IDENTIFICACIÓ
+         ==================================================== -->
+
+    <div class="identificacio">
+
+
+        <div class="camp">
+
+            <span class="etiqueta">
+                NOM:
+            </span>
+
+            <input
+                type="text"
+                id="nom"
+                class="nom"
+                autocomplete="off">
+
+        </div>
+
+
+        <div class="camp">
+
+            <span class="etiqueta">
+                NIP:
+            </span>
+
+            <input
+                type="text"
+                id="nip"
+                class="nip"
+                autocomplete="off">
+
+            <span style="margin-left: 5mm; flex-shrink: 0;">
+                CORREU:
+            </span>
+
+            <input
+                type="text"
+                id="correu"
+                style="width: 75mm;"
+                autocomplete="off">
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- ====================================================
+         TEXT INFORMATIU
+         ==================================================== -->
+
+    <div class="text-informatiu">
+
+        Exclusivament per al personal amb jornada ordinària.
+
+        <br>
+
+        <span class="negreta">
+
+            La modalitat d’acumulació de jornada amb caràcter
+            mensual es sol·licitarà abans del dia 20 del mes
+            anterior
+
+        </span>
+
+        <br>
+
+        a l’inici de mes.
+
+        <br>
+
+        La possibilitat de realitzar acumulació de jornada
+        dependrà de les necessitats del servei.
+
+    </div>
+
+
+
+    <!-- ====================================================
+         SOL·LICITO
+         ==================================================== -->
+
+    <div class="sollicito">
+
+        Sol·licito:
+
+    </div>
+
+
+    <div class="titol-taula">
+
+        Les següents acumulacions i lliurances:
+
+    </div>
+
+
+
+    <!-- ====================================================
+         TAULA - 5 SETMANES
+         ==================================================== -->
+
+    <table class="taula-acumulacions">
+
+
+        <thead>
+
+            <tr>
+
+                <th>
+                    Dia acumulació
+                </th>
+
+                <th>
+                    Dia lliurança
+                </th>
+
+            </tr>
+
+        </thead>
+
+
+        <tbody>
+
+
+            <!-- FILA 1 -->
+
+            <tr>
+
+                <td>
+
+                    <input
+                        type="date"
+                        id="acumulacio1">
+
+                </td>
+
+
+                <td>
+
+                    <input
+                        type="date"
+                        id="lliuranca1">
+
+                </td>
+
+            </tr>
+
+
+
+            <!-- FILA 2 -->
+
+            <tr>
+
+                <td>
+
+                    <input
+                        type="date"
+                        id="acumulacio2">
+
+                </td>
+
+
+                <td>
+
+                    <input
+                        type="date"
+                        id="lliuranca2">
+
+                </td>
+
+            </tr>
+
+
+
+            <!-- FILA 3 -->
+
+            <tr>
+
+                <td>
+
+                    <input
+                        type="date"
+                        id="acumulacio3">
+
+                </td>
+
+
+                <td>
+
+                    <input
+                        type="date"
+                        id="lliuranca3">
+
+                </td>
+
+            </tr>
+
+
+
+            <!-- FILA 4 -->
+
+            <tr>
+
+                <td>
+
+                    <input
+                        type="date"
+                        id="acumulacio4">
+
+                </td>
+
+
+                <td>
+
+                    <input
+                        type="date"
+                        id="lliuranca4">
+
+                </td>
+
+            </tr>
+
+
+
+            <!-- FILA 5 -->
+
+            <tr>
+
+                <td>
+
+                    <input
+                        type="date"
+                        id="acumulacio5">
+
+                </td>
+
+
+                <td>
+
+                    <input
+                        type="date"
+                        id="lliuranca5">
+
+                </td>
+
+            </tr>
+
+
+        </tbody>
+
+    </table>
+
+
+
+    <!-- ====================================================
+         DATA FINAL
+         ==================================================== -->
+
+    <div class="data-final">
+
+
+        <span>
+            Figueres,
+        </span>
+
+
+        <input
+            type="text"
+            id="dia">
+
+
+        <span>
+            de
+        </span>
+
+
+        <input
+            type="text"
+            id="mes">
+
+
+        <span>
+            de
+        </span>
+
+
+        <input
+            type="text"
+            id="any">
+
+
+    </div>
+
+
+
+    <!-- ====================================================
+         SIGNATURES
+         ==================================================== -->
+
+    <div class="signatures">
+
+
+        <!-- SIGNATURA TREBALLADOR -->
+
+        <div class="signatura">
+
+
+            <div class="text-signatura">
+
+                Signatura del Treballador
+
+            </div>
+
+
+            <div class="recuadre-signatura">
+
+
+                <div>
+
+                    <strong>
+                        NOM:
+                    </strong>
+
+                    <span id="nomSignatura"></span>
+
+                </div>
+
+
+                <div>
+
+                    <strong>
+                        NIP:
+                    </strong>
+
+                    <span id="nipSignatura"></span>
+
+                </div>
+
+
+                <div>
+
+                    <strong>
+                        CORREU:
+                    </strong>
+
+                    <span id="correuSignatura"></span>
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- SIGNATURA DIRECTOR -->
+
+        <div class="signatura">
+
+
+            <div class="text-signatura">
+
+                Signatura Director / Gerent del centre
+
+            </div>
+
+
+            <div class="espai-signatura-director">
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- ====================================================
+         PEU DEL DOCUMENT
+         ==================================================== -->
+
+    <div class="peu">
+
+
+        SUB-DIRECCIÓ GENERAL DE RECURSOS HUMANS I ECONÒMICS
+
+
+        <br>
+
+
+        SECRETARIA DE MESURES PENALS, REINSERCIÓ I ATENCIÓ A LA VÍCTIMA
+
+
+        <br>
+
+
+        DEPARTAMENT DE JUSTÍCIA
+
+
+    </div>
+
+
+</div>
+
+
+
+<!-- ========================================================
+     JAVASCRIPT
+     ======================================================== -->
+
+<script>
+
+
+/* ==========================================================
+   DESTINATARI DEL CORREU
+   ========================================================== */
+
+const DESTINATARI =
+    "vacances_aps_cppb.justicia@gencat.cat";
+
+
+
+/* ==========================================================
+   MESOS
+   ========================================================== */
+
+const mesos = [
+
+    "GENER",
+    "FEBRER",
+    "MARÇ",
+    "ABRIL",
+    "MAIG",
+    "JUNY",
+    "JULIOL",
+    "AGOST",
+    "SETEMBRE",
+    "OCTUBRE",
+    "NOVEMBRE",
+    "DESEMBRE"
+
+];
+
+
+
+/* ==========================================================
+   CONVERSIÓ DE DATA
+   yyyy-mm-dd → dd/mm/yyyy
+   ========================================================== */
+
+function formatarData(valor) {
+
+
+    if (!valor) {
+
+        return "";
+
+    }
+
+
+    const parts =
+        valor.split("-");
+
+
+    if (parts.length !== 3) {
+
+        return valor;
+
+    }
+
+
+    return (
+
+        parts[2] +
+        "/" +
+        parts[1] +
+        "/" +
+        parts[0]
+
+    );
+
+}
+
+
+
+/* ==========================================================
+   ACTUALITZAR RECUADRE DE SIGNATURA
+   ========================================================== */
+
+function actualitzarSignatura() {
+
+
+    const nom =
+        document
+        .getElementById("nom")
+        .value
+        .trim();
+
+
+    const nip =
+        document
+        .getElementById("nip")
+        .value
+        .trim();
+
+
+    const correu =
+        document
+        .getElementById("correu")
+        .value
+        .trim();
+
+
+    document
+        .getElementById("nomSignatura")
+        .textContent =
+        nom;
+
+
+    document
+        .getElementById("nipSignatura")
+        .textContent =
+        nip;
+
+
+    document
+        .getElementById("correuSignatura")
+        .textContent =
+        correu;
+
+}
+
+
+
+/* ==========================================================
+   ACTUALITZAR SIGNATURA EN ESCRIURE NOM
+   ========================================================== */
+
+document
+    .getElementById("nom")
+    .addEventListener(
+        "input",
+        actualitzarSignatura
+    );
+
+
+
+/* ==========================================================
+   ACTUALITZAR SIGNATURA EN ESCRIURE NIP
+   ========================================================== */
+
+document
+    .getElementById("nip")
+    .addEventListener(
+        "input",
+        actualitzarSignatura
+    );
+
+
+
+/* ==========================================================
+   ACTUALITZAR SIGNATURA EN ESCRIURE CORREU
+   ========================================================== */
+
+document
+    .getElementById("correu")
+    .addEventListener(
+        "input",
+        actualitzarSignatura
+    );
+
+
+
+/* ==========================================================
+   ENVIAR CORREU
+   ========================================================== */
+
+function enviarCorreo() {
+
+
+    /* ------------------------------------------------------
+       OBTENIM NOM
+       ------------------------------------------------------ */
+
+    const nom =
+        document
+        .getElementById("nom")
+        .value
+        .trim();
+
+
+
+    /* ------------------------------------------------------
+       OBTENIM NIP
+       ------------------------------------------------------ */
+
+    const nip =
+        document
+        .getElementById("nip")
+        .value
+        .trim();
+
+
+
+    /* ------------------------------------------------------
+       OBTENIM CORREU ELECTRÒNIC
+       ------------------------------------------------------ */
+
+    const correu =
+        document
+        .getElementById("correu")
+        .value
+        .trim();
+
+
+
+    /* ------------------------------------------------------
+       COMPROVEM NOM
+       ------------------------------------------------------ */
+
+    if (nom === "") {
+
+
+        alert(
+            "Cal introduir el NOM."
+        );
+
+
+        document
+            .getElementById("nom")
+            .focus();
+
+
+        return;
+
+    }
+
+
+
+    /* ------------------------------------------------------
+       COMPROVEM NIP
+       ------------------------------------------------------ */
+
+    if (nip === "") {
+
+
+        alert(
+            "Cal introduir el NIP."
+        );
+
+
+        document
+            .getElementById("nip")
+            .focus();
+
+
+        return;
+
+    }
+
+
+
+    /* ======================================================
+       CALCULEM EL MES SEGÜENT
+       ====================================================== */
+
+    const dataActual =
+        new Date();
+
+
+    let mesSeguent =
+        dataActual.getMonth() + 1;
+
+
+    if (mesSeguent > 11) {
+
+        mesSeguent = 0;
+
+    }
+
+
+    const nomMes =
+        mesos[mesSeguent];
+
+
+
+    /* ======================================================
+       ASSUMPTE DEL CORREU
+       ====================================================== */
+
+    const assumpte =
+
+        nom +
+        " - " +
+        nip +
+        " - ACUMULACIÓ DEL MES DE " +
+        nomMes;
+
+
+
+    /* ======================================================
+       COS DEL CORREU
+       ====================================================== */
+
+    let cos = "";
+
+
+
+    /* NOM */
+
+    cos +=
+
+        "NOM: " +
+        nom +
+        "\n";
+
+
+
+    /* NIP */
+
+    cos +=
+
+        "NIP: " +
+        nip +
+        "\n";
+
+
+
+    /* CORREU ELECTRÒNIC */
+
+    cos +=
+
+        "CORREU ELECTRÒNIC: " +
+        correu +
+        "\n\n";
+
+
+
+    /* TÍTOL */
+
+    cos +=
+
+        "Les següents acumulacions i lliurances:\n\n";
+
+
+
+    /* ======================================================
+       CAPÇALERA DE LES DUES COLUMNES
+       ====================================================== */
+
+    cos +=
+
+        "Dia acumulació".padEnd(
+            25,
+            " "
+        );
+
+
+    cos +=
+
+        "Dia lliurança\n";
+
+
+    cos +=
+
+        "----------------------------------------\n";
+
+
+
+    /* ======================================================
+       RECORREM NOMÉS LES 5 FILES
+       ====================================================== */
+
+    for (
+        let i = 1;
+        i <= 5;
+        i++
+    ) {
+
+
+        const acumulacio =
+
+            document
+            .getElementById(
+                "acumulacio" + i
+            )
+            .value;
+
+
+
+        const lliuranca =
+
+            document
+            .getElementById(
+                "lliuranca" + i
+            )
+            .value;
+
+
+
+        /* --------------------------------------------------
+           SI LA FILA NO ESTÀ BUIDA
+           -------------------------------------------------- */
+
+        if (
+
+            acumulacio !== "" ||
+            lliuranca !== ""
+
+        ) {
+
+
+            const dataAcumulacio =
+
+                formatarData(
+                    acumulacio
+                );
+
+
+
+            const dataLliuranca =
+
+                formatarData(
+                    lliuranca
+                );
+
+
+
+            cos +=
+
+                dataAcumulacio.padEnd(
+                    25,
+                    " "
+                );
+
+
+
+            cos +=
+
+                dataLliuranca +
+                "\n";
+
+        }
+
+    }
+
+
+
+    /* ======================================================
+       DATA FINAL
+       ====================================================== */
+
+    const dia =
+
+        document
+        .getElementById("dia")
+        .value
+        .trim();
+
+
+
+    const mes =
+
+        document
+        .getElementById("mes")
+        .value
+        .trim();
+
+
+
+    const any =
+
+        document
+        .getElementById("any")
+        .value
+        .trim();
+
+
+
+    if (
+
+        dia !== "" ||
+        mes !== "" ||
+        any !== ""
+
+    ) {
+
+
+        cos += "\n";
+
+
+        cos +=
+
+            "Figueres, " +
+            dia +
+            " de " +
+            mes +
+            " de " +
+            any +
+            "\n";
+
+    }
+
+
+
+    /* ======================================================
+       SIGNATURA DEL TREBALLADOR
+       ====================================================== */
+
+    cos += "\n";
+
+    cos +=
+        "SIGNATURA DEL TREBALLADOR\n";
+
+    cos +=
+        "+--------------------------------------+\n";
+
+    cos +=
+        "| NOM: " +
+        nom.padEnd(33, " ") +
+        "|\n";
+
+    cos +=
+        "| NIP: " +
+        nip.padEnd(33, " ") +
+        "|\n";
+
+    cos +=
+        "| CORREU: " +
+        correu.padEnd(30, " ") +
+        "|\n";
+
+    cos +=
+        "+--------------------------------------+\n";
+
+
+
+    /* ======================================================
+       CREEM EL MAILTO
+       ====================================================== */
+
+    const mailto =
+
+        "mailto:" +
+        DESTINATARI +
+        "?subject=" +
+        encodeURIComponent(
+            assumpte
+        ) +
+        "&body=" +
+        encodeURIComponent(
+            cos
+        );
+
+
+
+    /* ======================================================
+       OBRIM EL CLIENT DE CORREU
+       ====================================================== */
+
+    window.location.href =
+        mailto;
+
+}
+
+</script>
+
+
+</body>
+</html>
