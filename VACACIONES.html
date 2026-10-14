@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="UTF-8">
+<title>Formulari de Petició</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<style>
+body {
+  font-family: Arial, sans-serif;
+  background: #f9f9f9;
+  margin:0;
+  padding:0;
+}
+
+.container {
+  width:600px;
+  max-width:96%;
+  margin:24px auto;
+  background:#fff;
+  border-radius:12px;
+  box-shadow:0 4px 12px rgba(0,0,0,0.12);
+  padding:20px;
+}
+
+.header {
+  display:flex;
+  align-items:center;
+  margin-bottom:20px;
+}
+
+.header img {
+  width:286px;
+  height:124px;
+  object-fit:contain;
+  margin-right:20px;
+}
+
+.header h2 {
+  margin:0;
+  color:#333;
+  font-size:24px;
+}
+
+label {
+  display:block;
+  margin-top:10px;
+  font-weight:bold;
+  color:#444;
+}
+
+input[type="text"], input[type="date"], select, textarea {
+  width:100%;
+  padding:8px;
+  margin-top:5px;
+  border-radius:6px;
+  border:1px solid #ccc;
+  box-sizing:border-box;
+}
+
+.checkbox-group label {
+  display:flex;
+  align-items:center;
+  margin-top:5px;
+  font-weight:normal;
+  color:#444;
+}
+
+.checkbox-group input[type="checkbox"],
+.checkbox-group input[type="radio"] {
+  margin-right:8px;
+}
+
+button {
+  width:48%;
+  padding:12px;
+  margin-top:20px;
+  border:none;
+  border-radius:8px;
+  background:#007BFF;
+  color:#fff;
+  font-size:16px;
+  cursor:pointer;
+}
+
+button.reset {
+  background:#6c757d;
+}
+
+hr.small {
+  margin:14px 0;
+  border:none;
+  height:1px;
+  background:#eee;
+}
+
+.marca {
+  text-align:right;
+  font-size:12px;
+  color:maroon;
+  font-style:italic;
+  margin-top:16px;
+}
+
+@media (max-width:600px){
+  .header {
+    flex-direction:column;
+    align-items:center;
+    text-align:center;
+  }
+  .header img {
+    margin-right:0;
+    margin-bottom:12px;
+    width:220px;
+    height:auto;
+  }
+  .header h2 { font-size:20px; }
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+  <div class="header">
+    <img src="logo.png" alt="Logo">
+    <h2>FORMULARI DE PETICIÓ</h2>
+  </div>
+
+  <form id="formulari" onsubmit="enviarFormulario();return false;" autocomplete="off">
+
+    <label for="nom">NOM</label>
+    <input id="nom" type="text" required>
+
+    <label for="nip">NIP</label>
+    <input id="nip" type="text" required>
+
+    <label for="lloc">LLOC DE TREBALL</label>
+    <select id="lloc" required>
+      <option value="">-- Selecciona --</option>
+      <option>Auxiliar Administratiu/iva</option>
+      <option>Bibliotecari/ària</option>
+      <option>Cap de Programes d'Atenció Especialitzada</option>
+      <option>Cap de Programes d'Educació Social</option>
+      <option>Cap de Serveis</option>
+      <option>Cap d'Unitat</option>
+      <option>Conductor/a</option>
+      <option>Coordinador d'Equips Multidisciplinaris</option>
+      <option>CUE</option>
+      <option>CUSI</option>
+      <option>CUSV</option>
+      <option>Director/a</option>
+      <option>Educador/a</option>
+      <option>CAF</option>
+      <option>Encarregat/a d'Àrea Administrativa</option>
+      <option>Enginyer</option>
+      <option>GAMP</option>
+      <option>GAMV</option>
+      <option>Gerent</option>
+      <option>GO</option>
+      <option>GSI</option>
+      <option>Monitor/a formació ocupacional</option>
+      <option>RIET</option>
+      <option>Secretari/a Tècnic Jurídic</option>
+      <option>Subdirector/a de Tractament</option>
+      <option>Subdirector/a d'Interior</option>
+      <option>Tècnic de Prevenció i Salut Laboral</option>
+      <option>Titulat/ada Superior Criminòleg</option>
+      <option>Titulat/ada Superior Pedagog/a</option>
+      <option>Titulat/ada Superior Psicòleg/a</option>
+      <option>TMI</option>
+    </select>
+
+    <label for="guardia">GUÀRDIA</label>
+    <select id="guardia" required>
+      <option value="">-- Selecciona --</option>
+      <option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option>
+      <option>G</option><option>H</option><option>Equip de Tractament</option><option>MATÍ</option><option>TARDA</option><option>C/S</option>
+      <option>Cap Serveis</option><option>Gestió Econòmica</option><option>Gestió Penitenciària</option><option>OGI</option>
+      <option>Recursos Humans</option><option>SERVEIS EXT. C/S</option><option>SERVEIS EXT. MATÍ</option><option>SERVEIS EXT. TARDA</option>
+      <option>SERVEIS INT. C/S</option><option>SERVEIS INT. MATÍ</option><option>SERVEIS INT. TARDA</option>
+      <option>Suport Administratiu Equips Directius</option><option>TALLERS MATÍ</option><option>TALLERS TARDA</option>
+      <option>USI MATÍ</option><option>USI TARDA</option>
+    </select>
+
+    <hr class="small">
+
+    <div class="checkbox-group">
+      <label>PLANIFICAT AMB EL QUADRANT DE LA GUÀRDIA</label>
+      <label><input type="radio" name="planificat" value="SI">SI</label>
+      <label><input type="radio" name="planificat" value="NO">NO</label>
+    </div>
+
+    <div class="checkbox-group">
+      <label>TIPUS DE PETICIÓ</label>
+        <label><input type="checkbox" name="tipus" value="VACANCES"> VACANCES</label><br>
+        <label><input type="checkbox" name="tipus" value="ASSUMPTES PERSONALS"> ASSUMPTES PERSONALS</label><br>
+        <label><input type="checkbox" name="tipus" value="COMPENSACIÓ DE FESTIUS"> COMPENSACIÓ DE FESTIUS</label><br>
+        <label><input type="checkbox" name="tipus" value="HORES DE FORMACIÓ"> HORES DE FORMACIÓ</label><br>
+        <label><input type="checkbox" name="tipus" value="HORES EXTRAORDINÀRIES"> HORES EXTRAORDINÀRIES</label><br>
+        <label><input type="checkbox" name="tipus" value="ALTRES"> ALTRES</label>
+    </div>
+
+    <label for="especifiqueu">ESPECIFIQUEU(Altres, AP Recuperables, Hores per judici, etc...)</label>
+    <input id="especifiqueu" type="text">
+
+    <label for="data_inici">DATA INICI</label>
+    <input id="data_inici" type="date" required>
+
+    <label for="data_fi">DATA FI</label>
+    <input id="data_fi" type="date" required>
+
+    <hr class="small">
+
+    <div class="checkbox-group">
+      <label><input type="checkbox" id="chk_torns">TORNS</label>
+      <input id="total_torns" type="text" placeholder="TOTAL TORNS">
+    </div>
+
+    <div class="checkbox-group">
+      <label><input type="checkbox" id="chk_hores">HORES</label>
+      <input id="total_hores" type="text" placeholder="TOTAL HORES">
+    </div>
+
+    <label for="observacions">OBSERVACIONS</label>
+    <textarea id="observacions" rows="4"></textarea>
+
+    <div style="display:flex; justify-content:space-between;">
+      <button type="submit">Crear Correu</button>
+      <button type="reset" class="reset">Netejar</button>
+    </div>
+
+    <div class="marca">created by JSI Workstation</div>
+
+  </form>
+</div>
+
+<script>
+function dmy(f){ const [y,m,d]=f.split("-"); return `${d}/${m}/${y}`; }
+
+function mesAnyLletres(data){
+  const mesos = ["gener","febrer","març","abril","maig","juny","juliol","agost","setembre","octubre","novembre","desembre"];
+  const [y,m] = data.split("-");
+  return `${mesos[parseInt(m)-1]} ${y}`;
+}
+
+function enviarFormulario(){
+  const planificat = document.querySelector('input[name=planificat]:checked')?.value || "";
+  const tipus = Array.from(document.querySelectorAll('input[name="tipus"]:checked')).map(cb=>cb.value).join(", ");
+
+  let body = `NOM : ${nom.value}
+NIP: ${nip.value}
+LLOC DE TREBALL: ${lloc.value}
+GUÀRDIA: ${guardia.value}
+
+----------------------------------------
+
+PLANIFICAT AMB EL QUADRANT DE LA GUÀRDIA: ${planificat}
+TIPUS DE PETICIÓ: ${tipus}
+ESPECIFIQUEU: ${especifiqueu.value}
+DATA INICI: ${dmy(data_inici.value)}
+DATA FI: ${dmy(data_fi.value)}`;
+
+  if(chk_torns.checked){
+    body += `\nTORNS:\nTOTAL TORNS: ${total_torns.value}`;
+  }
+
+  if(chk_hores.checked){
+    body += `\nHORES:\nTOTAL HORES: ${total_hores.value}`;
+  }
+
+  body += `\nOBSERVACIONS: ${observacions.value}`;
+
+  const subject = `${nip.value}--${lloc.value}--${guardia.value}--${mesAnyLletres(data_inici.value)}`;
+  location.href = `mailto:vacances_aps_cppb.justicia@gencat.cat?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+}
+</script>
+</body>
+
+</html>
